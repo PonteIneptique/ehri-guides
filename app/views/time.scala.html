@@ -1,0 +1,70 @@
+@(message: List[(String, String)])(implicit request: RequestHeader, lang: Lang)
+
+@JS = @{List("leaflet.js", "jquery.ui.min.js") }
+@CSS = @{List("leaflet.css", "jquery.ui.css") }
+
+@main("Welcome to Play", JS, CSS) {
+	<article>
+		<header class="page-header">
+			<h1>Time browsing</h1>
+		</header>
+		<section>
+			<section class="content-options">
+				<form class="form-inline" role="form">
+					<div class="form-group">
+						<input class="form-control" name="search" placeholder="Quick Search" />
+					</div>
+					
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-default btn-active">Terezin Map</button>
+						<button type="button" class="btn btn-default">All Places</button>
+					</div>
+				</form>
+				<hr />
+			</section>
+			<div id="slider-range"></div>
+		</section>
+		<footer>
+		</footer>
+	</article>
+
+}{
+	<script type="text/javascript">
+	//A value is a number of months
+	// Min and max month are defined
+	var minMonth = { 
+		month : 9,
+		year : 33
+	}
+	var maxMonth = {
+		month : 12,
+		year : 48
+	}
+	//We compute the max month for the slider
+	var maxIntMonth = (maxMonth.year - minMonth.year) * 12 + (maxMonth.month - minMonth.month);
+	console.log(maxIntMonth);
+	
+	//We create a function to return us a time object
+	var computeTime = function(i) {
+		console.log(i);
+		month = minMonth.month + (i % 12);
+		year = minMonth.year +  Math.floor(i / 12);
+		return {month : month, year : year}
+	}
+	//We get some basic function to convert it
+	//
+	$(document).ready(function() {
+		$("#slider-range").slider({
+			range: true,
+			min: 0,
+			max: maxIntMonth,
+			values: [5,10],
+			step:1,
+			slide : function(event, ui) {
+				console.log(ui.values);
+				console.log(computeTime(ui.values[1]));
+			}
+		});
+	});
+	</script>
+}
