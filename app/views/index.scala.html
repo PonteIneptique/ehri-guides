@@ -4,27 +4,29 @@
 @CSS = @{List("leaflet.css") }
 
 @main("Welcome to Play", JS, CSS) {
-
-	<div class="content" id="main">
-		<div class="top">
-			<form class="form-inline" role="form">
-			
-				<div class="form-group">
-					<input class="form-control" name="search" placeholder="Quick Search" />
-				</div>
-				
-				<div class="btn-group pull-right">
-					<button type="button" class="btn btn-default btn-active">Terezin Map</button>
-					<button type="button" class="btn btn-default">All Places</button>
-				</div>
-				
-			</form>
-		</div>
-		<div class="page-header">
+	<article>
+		<header class="page-header">
 			<h1>Places browsing</h1>
-		</div>
-		<div id="map" style="height:400px;"></div>
-	</div>
+		</header>
+		<section>
+			<section class="content-options">
+				<form class="form-inline" role="form">
+					<div class="form-group">
+						<input class="form-control" name="search" placeholder="Quick Search" />
+					</div>
+					
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-default btn-active">Terezin Map</button>
+						<button type="button" class="btn btn-default">All Places</button>
+					</div>
+				</form>
+				<hr />
+			</section>
+			<div id="map" style="height:400px;"></div>
+		</section>
+		<footer>
+		</footer>
+	</article>
 
 }{
 	<script type="text/javascript">
