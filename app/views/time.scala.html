@@ -1,7 +1,7 @@
 @(message: List[(String, String)])(implicit request: RequestHeader, lang: Lang)
 
 @JS = @{List("leaflet.js", "jquery.ui.min.js") }
-@CSS = @{List("leaflet.css", "jquery.ui.css") }
+@CSS = @{List("leaflet.css", "jquery.ui.css", "jquery.ui.theme.css") }
 
 @main("Welcome to Play", JS, CSS) {
 	<article>
@@ -16,13 +16,26 @@
 					</div>
 					
 					<div class="btn-group pull-right">
-						<button type="button" class="btn btn-default btn-active">Terezin Map</button>
-						<button type="button" class="btn btn-default">All Places</button>
+						<button type="button" class="btn btn-default btn-active">Order by Date</button>
+						<button type="button" class="btn btn-default btn-active">By Size</button>
+						<button type="button" class="btn btn-default">By Title</button>
+					</div>
+					
+					<div id="slider-range" style="clear:both; margin-top:20px;"></div>
+					<div style=" margin-top:20px;" id="slider-val" >
+						<div class="form-group">
+							<input type="text" value="" id="date-range-min" />
+							<input class="form-control form-noborder min-show date-range-picker" data-target="date-range-min" placeholder="From" />
+						</div>
+						
+						<div class="form-group pull-right">
+							<input type="text" value="" id="date-range-max" />
+							<input class="form-control form-noborder max-show date-range-picker" data-target="date-range-max" placeholder="To" />
+						</div>
 					</div>
 				</form>
 				<hr />
 			</section>
-			<div id="slider-range"></div>
 		</section>
 		<footer>
 		</footer>
@@ -33,24 +46,25 @@
 	//A value is a number of months
 	// Min and max month are defined
 	var minMonth = { 
+		show : "1933-09-01",
 		month : 9,
 		year : 33
 	}
 	var maxMonth = {
+		show : "1948-12-31",
 		month : 12,
 		year : 48
 	}
 	//We compute the max month for the slider
-	var maxIntMonth = (maxMonth.year - minMonth.year) * 12 + (maxMonth.month - minMonth.month);
-	console.log(maxIntMonth);
+	var maxIntMonth = (maxMonth.year - minMonth.year + 1) * 12 + (maxMonth.month - minMonth.month);
 	
 	//We create a function to return us a time object
 	var computeTime = function(i) {
-		console.log(i);
-		month = minMonth.month + (i % 12);
-		year = minMonth.year +  Math.floor(i / 12);
+		month = (minMonth.month + i)  % 12;
+		year = minMonth.year +  Math.floor( (minMonth.month + i) / 12);
 		return {month : month, year : year}
 	}
+	addZ = function (n){return n<10? '0'+n:''+n;}
 	//We get some basic function to convert it
 	//
 	$(document).ready(function() {
@@ -58,12 +72,55 @@
 			range: true,
 			min: 0,
 			max: maxIntMonth,
-			values: [5,10],
+			values: [ Math.floor(maxIntMonth/4),Math.floor(maxIntMonth/4*3)],
 			step:1,
 			slide : function(event, ui) {
-				console.log(ui.values);
-				console.log(computeTime(ui.values[1]));
+				dat = $("#slider-val");
+				max = computeTime(ui.values[1]);
+				min = computeTime(ui.values[0]);
+				
+				max.date = new Date;
+				max.date.setMonth(max.month);
+				max.date.setYear("19" + max.year);
+				max.date.setDate(0);
+				max.show = max.date.toDateString();
+				max.val = max.date.getFullYear() + "-" + addZ(max.date.getMonth()+1) + "-" + addZ(max.date.getDate());
+				console.log(max);
+				
+				min.date = new Date;
+				min.date.setMonth(min.month);
+				min.date.setYear("19" + min.year);
+				min.date.setDate(1);
+				min.show = min.date.toDateString();
+				min.val = min.date.getFullYear() + "-" + addZ(min.date.getMonth()+1) + "-" + addZ(min.date.getDate());
+				console.log(min);
+				 $("#slider-val .min-show").val(min.show);
+				 $("#slider-val .max-show").val(max.show);
+				 $("#date-range-min").val(min.val);
+				 $("#date-range-max").val(max.val);
 			}
+		});
+		 $( ".date-range-picker.min-show" ).datepicker({
+			changeMonth: true,
+			changeYear: true,
+			minDate: new Date("19" + minMonth.year, minMonth.month - 1, 1),
+			maxDate: new Date("19" + maxMonth.year, maxMonth.month - 1, 0),
+			dateFormat: "D M dd yy",
+			altField: "#date-range-min",
+			altFormat: "yy-mm-dd",
+			onSelect: function(dateText, inst) {
+				console.log(dateText);
+				console.log(inst);
+			}
+		});
+		 $( ".date-range-picker.max-show" ).datepicker({ 
+			changeMonth: true,
+			changeYear: true,
+			minDate: new Date("19" + minMonth.year, minMonth.month - 1, 1),
+			maxDate: new Date("19" + maxMonth.year, maxMonth.month - 1, 0),
+			dateFormat: "D M dd yy",
+			altField: "#date-range-max",
+			altFormat: "yy-mm-dd"
 		});
 	});
 	</script>

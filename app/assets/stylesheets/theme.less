@@ -5,22 +5,7 @@
 @import "_variables.less";
 @import "_mixins.less";
 
-
-//
-// EHRI COLORS
-// --------------------------------------------------
-
-@ehri-dark-purple : #360f4f;
-@ehri-medium-purple : #83004c;
-@ehri-light-purple : #84004c;
-
-@ehri-darkest-grey:#333333;
-@ehri-dark-grey:#999999;
-@ehri-medium-grey:#CFCFD0;
-@ehri-light-grey:#ECEDEE;
-@ehri-font:"news-gothic-std",sans-serif;
-
-@content-color:#FFFFFF;
+@import "_ehri_variables.less";
 
 
 //
@@ -62,6 +47,11 @@ body > .container {
 			clear:both;
 			min-height:20px;
 		}
+	}
+	
+	.form-noborder {
+		border:none;
+		.box-shadow(none);
 	}
 }
 //
