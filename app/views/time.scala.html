@@ -24,17 +24,56 @@
 					<div id="slider-range" style="clear:both; margin-top:20px;"></div>
 					<div style=" margin-top:20px;" id="slider-val" >
 						<div class="form-group">
-							<input type="text" value="" id="date-range-min" />
+							<input type="hidden" value="" id="date-range-min" />
 							<input class="form-control form-noborder min-show date-range-picker" data-target="date-range-min" placeholder="From" />
 						</div>
 						
 						<div class="form-group pull-right">
-							<input type="text" value="" id="date-range-max" />
+							<input type="hidden" value="" id="date-range-max" />
 							<input class="form-control form-noborder max-show date-range-picker" data-target="date-range-max" placeholder="To" />
 						</div>
 					</div>
 				</form>
 				<hr />
+			</section>
+			<section class="content-results">
+				<ul class="list-item">
+					<li class="item-wrapper documentaryUnit">
+						<div class="item-option"><span class="item-toggle glyphicon-plus"></span></div>
+						<div class="item-title">Lorem ipsum</div>
+						<div class="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla augue lacus, nec molestie sem dapibus a. Maecenas sollicitudin ac ipsum at commodo. Curabitur varius ultricies purus, eget imperdiet nisl fringilla ac. In hendrerit libero turpis, vitae pretium quam sagittis vitae. Ut elementum diam ac adipiscing volutpat. </div>
+					</li>
+					<li class="item-wrapper">
+						<div class="item-option"><span class="item-toggle glyphicon-plus"></span></div>
+						<div class="item-title">Lorem ipsum</div>
+						<div class="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla augue lacus, nec molestie sem dapibus a. Maecenas sollicitudin ac ipsum at commodo. Curabitur varius ultricies purus, eget imperdiet nisl fringilla ac. In hendrerit libero turpis, vitae pretium quam sagittis vitae. Ut elementum diam ac adipiscing volutpat. </div>
+					</li>
+					<li class="item-wrapper repository">
+						<div class="item-option"><span class="item-toggle glyphicon-plus"></span></div>
+						<div class="item-title">Lorem ipsum</div>
+						<div class="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla augue lacus, nec molestie sem dapibus a. Maecenas sollicitudin ac ipsum at commodo. Curabitur varius ultricies purus, eget imperdiet nisl fringilla ac. In hendrerit libero turpis, vitae pretium quam sagittis vitae. Ut elementum diam ac adipiscing volutpat. </div>
+					</li>
+					<li class="item-wrapper">
+						<div class="item-option"><span class="item-toggle glyphicon-plus"></span></div>
+						<div class="item-title">Lorem ipsum</div>
+						<div class="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla augue lacus, nec molestie sem dapibus a. Maecenas sollicitudin ac ipsum at commodo. Curabitur varius ultricies purus, eget imperdiet nisl fringilla ac. In hendrerit libero turpis, vitae pretium quam sagittis vitae. Ut elementum diam ac adipiscing volutpat. </div>
+					</li>
+					<li class="item-wrapper historicalAgent">
+						<div class="item-option"><span class="item-toggle glyphicon-plus"></span></div>
+						<div class="item-title">Lorem ipsum</div>
+						<div class="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla augue lacus, nec molestie sem dapibus a. Maecenas sollicitudin ac ipsum at commodo. Curabitur varius ultricies purus, eget imperdiet nisl fringilla ac. In hendrerit libero turpis, vitae pretium quam sagittis vitae. Ut elementum diam ac adipiscing volutpat. </div>
+					</li>
+					<li class="item-wrapper">
+						<div class="item-option"><span class="item-toggle glyphicon-plus"></span></div>
+						<div class="item-title">Lorem ipsum</div>
+						<div class="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla augue lacus, nec molestie sem dapibus a. Maecenas sollicitudin ac ipsum at commodo. Curabitur varius ultricies purus, eget imperdiet nisl fringilla ac. In hendrerit libero turpis, vitae pretium quam sagittis vitae. Ut elementum diam ac adipiscing volutpat. </div>
+					</li>
+					<li class="item-wrapper virtualCollection">
+						<div class="item-option"><span class="item-toggle glyphicon-plus"></span></div>
+						<div class="item-title">Lorem ipsum</div>
+						<div class="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla augue lacus, nec molestie sem dapibus a. Maecenas sollicitudin ac ipsum at commodo. Curabitur varius ultricies purus, eget imperdiet nisl fringilla ac. In hendrerit libero turpis, vitae pretium quam sagittis vitae. Ut elementum diam ac adipiscing volutpat. </div>
+					</li>
+				</ul>
 			</section>
 		</section>
 		<footer>
@@ -56,18 +95,17 @@
 		year : 48
 	}
 	//We compute the max month for the slider
-	var maxIntMonth = (maxMonth.year - minMonth.year + 1) * 12 + (maxMonth.month - minMonth.month);
+	var maxIntMonth = (maxMonth.year - minMonth.year) * 12 + (maxMonth.month - minMonth.month);
 	
-	//We create a function to return us a time object
-	var computeTime = function(i) {
-		month = (minMonth.month + i)  % 12;
-		year = minMonth.year +  Math.floor( (minMonth.month + i) / 12);
-		return {month : month, year : year}
-	}
 	addZ = function (n){return n<10? '0'+n:''+n;}
 	//We get some basic function to convert it
 	//
 	$(document).ready(function() {
+		//Show item descriptions
+		$(".item-option").on("click", function() {
+			$(this).siblings(".item-description").toggleClass("in");
+		});
+		
 		$("#slider-range").slider({
 			range: true,
 			min: 0,
@@ -76,24 +114,27 @@
 			step:1,
 			slide : function(event, ui) {
 				dat = $("#slider-val");
-				max = computeTime(ui.values[1]);
-				min = computeTime(ui.values[0]);
 				
-				max.date = new Date;
-				max.date.setMonth(max.month);
-				max.date.setYear("19" + max.year);
-				max.date.setDate(0);
-				max.show = max.date.toDateString();
-				max.val = max.date.getFullYear() + "-" + addZ(max.date.getMonth()+1) + "-" + addZ(max.date.getDate());
-				console.log(max);
+				//We create a basic object based on min time 
+				generalDate = new Date;
+				generalDate.setMonth(minMonth.month-1);
+				generalDate.setYear("19"+minMonth.year);
+				generalDate.setDate(1);
 				
-				min.date = new Date;
-				min.date.setMonth(min.month);
-				min.date.setYear("19" + min.year);
-				min.date.setDate(1);
+				//Which we duplicate and add to the number of month we have ! For minimal value, which should be ui.values[0]
+				min = {}
+				min.date = generalDate;
+				min.date.setMonth(ui.values[0] + (minMonth.month - 1));
 				min.show = min.date.toDateString();
 				min.val = min.date.getFullYear() + "-" + addZ(min.date.getMonth()+1) + "-" + addZ(min.date.getDate());
-				console.log(min);
+				
+				//And ui.values[1] should be the max slide point
+				max = {}
+				max.date = generalDate;
+				max.date.setMonth(ui.values[1] + (minMonth.month - 1));
+				max.show = max.date.toDateString();
+				max.val = max.date.getFullYear() + "-" + addZ(max.date.getMonth()+1) + "-" + addZ(max.date.getDate());
+				
 				 $("#slider-val .min-show").val(min.show);
 				 $("#slider-val .max-show").val(max.show);
 				 $("#date-range-min").val(min.val);

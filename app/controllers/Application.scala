@@ -14,7 +14,7 @@ object Application extends Controller {
 			val show = result().map(row => 
 				row[String]("X_place") -> row[String]("Y_place")
 			).toList
-			Ok(views.html.time(show))
+			Ok(views.html.index(show))
 		} 
 	}
 

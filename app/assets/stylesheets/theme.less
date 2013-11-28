@@ -52,6 +52,90 @@ body > .container {
 	.form-noborder {
 		border:none;
 		.box-shadow(none);
+		cursor:pointer;
+		font-weight:bold;
+		text-align:center;
+	}
+	
+	.list-item {
+		margin:0;
+		padding:0;
+		
+		.item-wrapper {
+			margin:0 0 1em 0;
+			padding:0;
+			display:block;
+			position:relative;
+			
+			.item-option {
+				cursor:pointer;
+				position:absolute;
+				top:0;
+				left:-30px;
+				height:30px;
+				width:0;
+				overflow:hidden;
+				background-color: @ehri-dark-purple;
+				color:white;
+				line-height:30px;
+				text-align:center;
+				
+				.transition(all 0.5s ease);
+			}
+			&:hover {
+				.item-option {
+					width:30px;
+					.transition(all 0.5s ease);
+				}
+			}
+			
+			.item-title {
+				min-height:30px;
+				line-height:30px;
+				font-weight:bolder;
+				padding-left:1em;
+				border-left:thick solid @ehri-dark-purple;
+				
+			}
+			
+			.item-description {
+				display:none;
+				font-style:italic;
+				padding-left:1em;
+				border-left:thick solid lighten(@ehri-dark-purple, 20%);	
+				min-height:0;
+				max-height:0;
+				.transition(all 0.5s ease);
+				&.in {
+					display:block;
+					min-height:30px;
+					max-height:2000px;
+					.transition(all 0.5s ease);
+				}
+			}
+			
+			//Color code
+			&.documentaryUnit {
+				.item-title				{	border-color:@ehri-documentary-unit; }
+				.item-description		{	border-color:lighten(@ehri-documentary-unit, 20%); }
+				.item-option		{	background-color:@ehri-documentary-unit;	color:white; }
+			}
+			&.repository {
+				.item-title				{	border-color:@ehri-repository; }
+				.item-description		{	border-color:lighten(@ehri-repository, 20%); }
+				.item-option		{	background-color:@ehri-repository;	color:white; }
+			}
+			&.virtualCollection {
+				.item-title				{	border-color:@ehri-virtual-collections; }
+				.item-description		{	border-color:lighten(@ehri-virtual-collections, 20%); }
+				.item-option		{	background-color:@ehri-virtual-collections;	color:white; }
+			}
+			&.historicalAgent {
+				.item-title				{	border-color:@ehri-historical-agent; }
+				.item-description		{	border-color:lighten(@ehri-historical-agent, 20%); }
+				.item-option		{	background-color:@ehri-historical-agent;	color:white; }
+			}
+		}
 	}
 }
 //
