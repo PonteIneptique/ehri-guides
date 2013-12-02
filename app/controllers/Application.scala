@@ -17,5 +17,16 @@ object Application extends Controller {
 			Ok(views.html.index(show))
 		} 
 	}
+	
+	def timeBrowse = Action { implicit request =>
+		println(request.getQueryString("foo"))
+		DB.withConnection { implicit c =>
+			val result = SQL("Select * from places")
+			val show = result().map(row => 
+				row[String]("X_place") -> row[String]("Y_place")
+			).toList
+			Ok(views.html.time(show))
+		} 
+	}
 
 }

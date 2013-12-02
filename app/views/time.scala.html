@@ -116,21 +116,27 @@
 				dat = $("#slider-val");
 				
 				//We create a basic object based on min time 
-				generalDate = new Date;
-				generalDate.setMonth(minMonth.month-1);
-				generalDate.setYear("19"+minMonth.year);
-				generalDate.setDate(1);
+				generalDate = function() { 
+					var generalDate;
+					generalDate = new Date;
+					generalDate.setMonth(minMonth.month-1);
+					generalDate.setYear("19"+minMonth.year);
+					generalDate.setDate(1);
+					return generalDate;
+				}
 				
 				//Which we duplicate and add to the number of month we have ! For minimal value, which should be ui.values[0]
 				min = {}
-				min.date = generalDate;
+				min.date = generalDate();
 				min.date.setMonth(ui.values[0] + (minMonth.month - 1));
 				min.show = min.date.toDateString();
 				min.val = min.date.getFullYear() + "-" + addZ(min.date.getMonth()+1) + "-" + addZ(min.date.getDate());
 				
 				//And ui.values[1] should be the max slide point
 				max = {}
-				max.date = generalDate;
+				max.date = generalDate();
+				console.log(max.date);
+				console.log(ui.values[1]);
 				max.date.setMonth(ui.values[1] + (minMonth.month - 1));
 				max.show = max.date.toDateString();
 				max.val = max.date.getFullYear() + "-" + addZ(max.date.getMonth()+1) + "-" + addZ(max.date.getDate());
