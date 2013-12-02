@@ -137,7 +137,8 @@
 				max.date = generalDate();
 				console.log(max.date);
 				console.log(ui.values[1]);
-				max.date.setMonth(ui.values[1] + (minMonth.month - 1));
+				max.date.setMonth(ui.values[1] + (minMonth.month));
+				max.date.setDate(0);
 				max.show = max.date.toDateString();
 				max.val = max.date.getFullYear() + "-" + addZ(max.date.getMonth()+1) + "-" + addZ(max.date.getDate());
 				
@@ -154,11 +155,7 @@
 			maxDate: new Date("19" + maxMonth.year, maxMonth.month - 1, 0),
 			dateFormat: "D M dd yy",
 			altField: "#date-range-min",
-			altFormat: "yy-mm-dd",
-			onSelect: function(dateText, inst) {
-				console.log(dateText);
-				console.log(inst);
-			}
+			altFormat: "yy-mm-dd"
 		});
 		 $( ".date-range-picker.max-show" ).datepicker({ 
 			changeMonth: true,

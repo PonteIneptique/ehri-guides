@@ -5,6 +5,8 @@
 # Home page
 GET     /                           controllers.Application.index
 GET     /timeline                           controllers.Application.timeBrowse
+GET     /keywords                           controllers.Application.keywordBrowse
+GET     /people                           controllers.Application.personBrowse
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

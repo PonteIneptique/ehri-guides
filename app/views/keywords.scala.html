@@ -1,0 +1,90 @@
+@(message: List[(String, String)])(implicit request: RequestHeader, lang: Lang)
+
+@JS = @{List("leaflet.js", "jquery.ui.min.js") }
+@CSS = @{List("leaflet.css", "jquery.ui.css", "jquery.ui.theme.css", "font-awesome.css") }
+
+@main("Welcome to Play", JS, CSS) {
+	<article>
+		<header class="page-header">
+			<h1>Keywords</h1>
+		</header>
+		<section>
+			<section class="content-options">
+				<form class="form-inline" role="form">
+					<div class="form-group">
+						<input class="form-control" name="search" placeholder="Quick Search" />
+					</div>
+					
+					<div class="btn-group pull-right">
+						<button type="button" class="btn btn-default btn-active"><span class="glyphicon-key"></span></button>
+					</div>
+				</form>
+				<hr />
+			</section>
+			<section class="content-results">
+				<ul class="list-item">
+					<li class="item-wrapper">
+						<div class="item-option"><i class="item-nice-checkbox fa fa-square-o"></i></div>
+						<a class="item-title keyword-title"><span class="item-parent">Lorem</span>Lorem ipsum</a>
+						<div class="item-description in">Vivamus a ante vel neque malesuada vehicula non quis leo. Phasellus et enim rutrum, porttitor diam vel, faucibus diam. Aenean id pulvinar nisl. Sed ipsum nibh, pharetra eu felis quis, tempus egestas leo. Vestibulum ipsum lorem, pellentesque et nisi ut, tristique rhoncus odio. Morbi adipiscing eros quis quam auctor fermentum. Sed ultricies ligula augue, et suscipit lorem aliquet quis. Aenean vel nisl in massa consectetur sagittis. </div>
+						<input class="item-checkbox" type="checkbox" value="5" />
+					</li>
+					<li class="item-wrapper">
+						<div class="item-option"><i class="item-nice-checkbox fa fa-square-o"></i></div>
+						<a class="item-title keyword-title"><span class="item-parent">Lorem</span><span class="item-parent">Lorem</span>Lorem ipsum</a>
+						<input class="item-checkbox" type="checkbox" value="5" />
+						<div class="item-description in">Vivamus a ante vel neque malesuada vehicula non quis leo. Phasellus et enim rutrum, porttitor diam vel, faucibus diam. Aenean id pulvinar nisl. Sed ipsum nibh, pharetra eu felis quis, tempus egestas leo. Vestibulum ipsum lorem, pellentesque et nisi ut, tristique rhoncus odio. Morbi adipiscing eros quis quam auctor fermentum. Sed ultricies ligula augue, et suscipit lorem aliquet quis. Aenean vel nisl in massa consectetur sagittis. </div>
+					</li>
+					<li class="item-wrapper">
+						<div class="item-option"><i class="item-nice-checkbox fa fa-square-o"></i></div>
+						<a class="item-title keyword-title"><span class="item-parent">Lorem</span><span class="item-parent">Lorem</span><span class="item-parent">Lorem</span>Lorem ipsum</a>
+						<div class="item-description in">Vivamus a ante vel neque malesuada vehicula non quis leo. Phasellus et enim rutrum, porttitor diam vel, faucibus diam. Aenean id pulvinar nisl. Sed ipsum nibh, pharetra eu felis quis, tempus egestas leo. Vestibulum ipsum lorem, pellentesque et nisi ut, tristique rhoncus odio. Morbi adipiscing eros quis quam auctor fermentum. Sed ultricies ligula augue, et suscipit lorem aliquet quis. Aenean vel nisl in massa consectetur sagittis. </div>
+						<input class="item-checkbox" type="checkbox" value="5" />
+					</li>
+					<li class="item-wrapper">
+						<div class="item-option"><i class="item-nice-checkbox fa fa-square-o"></i></div>
+						<a class="item-title keyword-title">Lorem ipsum</a>
+						<input class="item-checkbox" type="checkbox" value="5" />
+						<div class="item-description in">Vivamus a ante vel neque malesuada vehicula non quis leo. Phasellus et enim rutrum, porttitor diam vel, faucibus diam. Aenean id pulvinar nisl. Sed ipsum nibh, pharetra eu felis quis, tempus egestas leo. Vestibulum ipsum lorem, pellentesque et nisi ut, tristique rhoncus odio. Morbi adipiscing eros quis quam auctor fermentum. Sed ultricies ligula augue, et suscipit lorem aliquet quis. Aenean vel nisl in massa consectetur sagittis. </div>
+					</li>
+				</ul>
+			</section>
+		</section>
+		<footer>
+		</footer>
+	</article>
+
+}{
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var niceCheck = function(item, apply) {
+			//If the item is the checkbox itself
+			var checkbox = item.siblings("input[type='checkbox']");
+			
+			//We get the reverse status of the checkbox if we are checking the box. If actually we apply style, we just get the normal status
+			if(!apply) {
+				var status = !checkbox.is(":checked");
+			} else {
+				var status = checkbox.is(":checked");
+			}
+						
+			//We check the checkbox with the reverse status. As checkbox is a var, we need to get the DOM object through .get(0)
+			checkbox.get(0).checked = status;
+			
+			//We set the css class
+			var css = ((status == true) ? " fa-check-square-o" : " fa-square-o ");
+			item.parent().toggleClass("checked", status);
+			item.siblings(".item-option").children(".item-nice-checkbox").attr("class", "fa item-nice-checkbox " + css);
+		}
+		$(".list-item .item-title").each(function(index) {
+			niceCheck($(this), true);
+		});
+		$(".list-item .item-title").on("click", function() {
+			niceCheck($(this));
+		});
+		$(".list-item .item-option").on("click", function() {
+			niceCheck($(this).siblings(".item-title"), false);
+		});
+	});
+	</script>
+}
