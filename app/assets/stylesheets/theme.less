@@ -4,8 +4,8 @@
 
 @import "./bootstrap/_variables.less";
 @import "./bootstrap/_mixins.less";
-
 @import "_ehri_variables.less";
+@import "./ehri/_nav.less";
 
 
 //
@@ -23,21 +23,30 @@ body > .container {
 // Content
 // --------------------------------------------------
 #main {
-	.top {
-		border-top:4px solid @ehri-dark-purple;
-		border-bottom:2px solid @ehri-dark-purple;
-		background-color:@ehri-light-purple;
-		padding:5px;
-	}
 	article {
 		background-color:@content-color;
-		padding:5px;
+		padding:0px;
 		header {
 			margin-top:0;
 			padding-top:0;
-			h1 {
-				font-variant: small-caps;
-				font-weight: bold;
+			margin: 0 -15px 10px -15px ;
+			.breadcrumb {
+				li + li:before {
+					content:" › ";
+				}
+				li.active {
+					color:white;
+				}
+				background-color:@ehri-darkest-grey;
+				border-radius:0;
+				a, a:hover, a:focus {
+					color:#999999;
+					text-decoration:none;
+				}
+				&.documentaryUnit {		background-color:@ehri-documentary-unit;	color:white; }
+				&.repository {			background-color:@ehri-repository;			color:white; }
+				&.virtualCollection {	background-color:@ehri-virtual-collections;	color:white; }
+				&.historicalAgent {		background-color:@ehri-historical-agent;	color:white; }
 			}
 		}
 		& > section {
@@ -225,130 +234,40 @@ body > .container {
 			}
 		}
 	}
+	
+	#description-hover {
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:0;
+		background-color:rgba(0,0,0,0.7);
+		color:white;
+		text-align:justify;
+		.transition(all 1s ease);
+		overflow:hidden;
+	}
+	.in > #description-hover {
+		height:100%;
+		.transition(all 1s ease);
+		overflow:auto;
+		padding:10px;
+	}
 }
 //
 // Top Bar
 // --------------------------------------------------
-
-#menu {
-	background-color:white;
-	border:none;
-	margin-top:40px;
-	padding-left:0;
-	margin-left:-15px;
-	.border-left-radius(0);
-	min-height:40px;
+header#top {
+	padding-top:40px;
+	background-color:@ehri-darkest-grey;
 	
-	
-	//
-	//	Dropdown in nav
-	//----
-	.dropdown.open {
-		> a:focus {
-			border-top-color:@ehri-dark-grey;
-			background-color:@ehri-light-purple;
-		}
-		ul.dropdown-menu {
-			padding:0;
-			padding-top:10px;
-			padding-bottom:10px;
-			border-radius:0;
-			border:none;
-			background-color:@ehri-medium-grey;
-			li > a {
-				color:@ehri-darkest-grey;
-				border-left:5px solid @ehri-medium-grey;
-				font-weight:bold;
-				font-variant:small-caps;
-				font-size:smaller;
-				&:hover {
-					border-left:5px solid @ehri-medium-purple;
-					color:@ehri-darkest-grey;
-					cursor:pointer;
-				}
-			}
-			& > li.dropdown-header {
-				font-weight:bold;
-				font-variant:small-caps;
-				font-size:16px;
-				border-left:5px solid @ehri-dark-purple;
-				color:@ehri-darkest-grey;
-				
-			}
-		}
+	li {
+		border-right:0!important;
 	}
-	.navbar-collapse {
-		padding-left:0;
-		.navbar-nav {
-			> li {
-				border-left:1px solid @content-color;
-				background-color:@ehri-dark-purple;
-				
-				&:hover {
-					.box-shadow(0px 2px 5px rgba(0, 0, 0, 0.5));
-				}
-				&:first-child {
-					border-left:none;
-				}
-				&:last-child {
-					.border-right-radius(5px);
-				}
-				
-				& > a {
-					color:#FFFFFF;
-					font-weight:bold;
-					font-variant:small-caps
-				}
-			}
-			.active {
-				& > a {
-					background-color:@ehri-medium-purple;
-				}
-			}
-		}
-		
-		//
-		//	Navbar Form
-		//------
-		.navbar-form {
-			padding:0;
-			.input-group {
-				.form-control {
-					border-color:@ehri-dark-purple;
-					&:focus {
-						.box-shadow(0px 2px 5px rgba(0, 0, 0, 0.075));
-					}
-				}
-				.input-group-addon {
-					padding:0;
-					background-color:@ehri-dark-purple;
-					border-color:@ehri-dark-purple;
-					.dropdown-toggle {
-						display:block;
-						height:100%;
-						width:100%;
-						color:white;
-						
-						//<---
-						//Inherited from input group addon
-						//
-						padding:6px 12px;
-						//--->
-						
-						&:hover {
-							cursor:pointer;
-							color:white;
-						}
-					}
-					.dropdown-menu {
-						text-align:left;
-					}
-				}
-			}
-		}
+	form {
+		margin-top:40px;
 	}
 }
-
 
 
 //
@@ -419,114 +338,43 @@ body > .container {
 	//
 	//	MENU
 	//---------------------
-	#menu {
-		margin-left:0;
-		.border-left-radius(0);
-		.border-right-radius(0);
-		.navbar-collapse {
-			
-			&.in {
-				overflow-y:visible;
-			}
-			.navbar-right, .navbar-left {
-				float:none!important;
-				display:block;
-				> input-group {
-					display:block;
-					width:100%;
-				}
-				&:after, &:before {
-					.clearfix();
-					display:table;
-					content : " ";
-					clear:both;
-				}
-			}
-			.navbar-nav {
-				float:none;
-				margin-right:15px;
-				margin-left:15px;
-				border-radius:5px;
-				& > li {
-					float:none;
-					display:block;
-					border-left:0px;
-					&:first-child {
-						.border-top-radius(5px);
-						a {
-							.border-top-radius(5px);
-						}
-					}
-					&:last-child {
-						.border-right-radius(0);
-						.border-bottom-radius(5px);
-					}
-				}
-			}
-		
-			.navbar-form {
-				&.navbar-right {
-					float:none;
-				}
-				margin:15px;
-				.box-shadow(none);
-				border:none;
-				display:block;
-				
-				.input-group {
-					display:block;
-					> * {
-						display:block;
-					}
-					.form-control {
-						.border-right-radius(5px);
-					}
-					> .input-group-addon {
-						display:block;
-						border:none;
-						background-color:@content-color;
-						padding:0;
-						width:100%;
-					}
-				}
-			}
+	#top {
+		padding-top:5px;
+		padding-bottom:5px;
+		&:after, &:before {
+			.clearfix();
+			display:table;
+			content : " ";
+			clear:both;
 		}
-		.dropdown {
-			&:after, &:before {
-				.clearfix();
-				display:table;
-				content : " ";
-				clear:both;
-			}
-			.dropdown-toggle {
-				display:block;
-				clear:both;
-			}
-			.dropdown-menu {
-				position:static;
-				z-index:auto;
+		.dropdown-toggle {
+			display:none!important;
+			clear:both;
+		}
+		.dropdown-menu {
+			position:static;
+			z-index:auto;
+			display:block;
+			float:none;
+			border:none;
+			.box-shadow(none);
+			> li {
 				display:block;
 				width:100%;
-				float:none;
-				border:none;
-				.box-shadow(none);
-				> li {
+				> a {
 					display:block;
 					width:100%;
-					> a {
-						display:block;
-						width:100%;
-						cursor:pointer;
-					}
+					cursor:pointer;
 				}
-				
 			}
+			
 		}
 	}
 	//
 	//	Content
 	//---------------------
 	#main {
+		article header { margin: 0 0px 10px 0px ; }
 		.btn-group.pull-right, .form-group.pull-right {
 			float:none!important;
 		}

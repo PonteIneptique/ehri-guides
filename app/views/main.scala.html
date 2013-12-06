@@ -1,4 +1,4 @@
-@(title: String, javascript : List[String] = Nil, stylesheets : List[String] = Nil)(content: Html)(scripts : Html = Html(""))(implicit request: RequestHeader, lang: Lang)
+@(title: String, javascript : List[String] = Nil, stylesheets : List[String] = Nil, location: String = "places")(content: Html)(scripts : Html = Html(""))(implicit request: RequestHeader, lang: Lang)
 
 <!DOCTYPE html>
 
@@ -13,8 +13,24 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     </head>
     <body>
+		<header id="top">
+			<div class="container">
+				@includes.top(location)
+			</div>
+			<div id="page-title" style="background-color:#360f4f;">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4 col-md-push-8">
+							<h2 style="color:white; font-variant: small-caps;font-weight: bold; margin-bottom:20px; font-size:24px; line-height:30px; ">Terezin Research Guides</h2>
+						</div>
+						<div class="col-md-8 col-md-pull-4">
+							<h1 style="color:white; font-variant: small-caps; font-size:30px; font-weight: bold; margin-bottom:20px;">@title</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
 		<div class="container">
-			@includes.top()
 			<div class="row">
 				<div class="col-md-8" id="main">
 					@content
@@ -22,14 +38,7 @@
 				<div class="col-md-4" id="right-bar">
 					<div class="well">
 						<article>
-							<header>
-								<h1>Terezin
-								<br/>Research
-								<br />Guides</h1>
-							</header>
-							<section>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla augue lacus, nec molestie sem dapibus a. Maecenas sollicitudin ac ipsum at commodo. Curabitur varius ultricies purus, eget imperdiet nisl fringilla ac. In hendrerit libero turpis, vitae pretium quam sagittis vitae. Ut elementum diam ac adipiscing volutpat.
-							</section>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla augue lacus, nec molestie sem dapibus a. Maecenas sollicitudin ac ipsum at commodo. Curabitur varius ultricies purus, eget imperdiet nisl fringilla ac. In hendrerit libero turpis, vitae pretium quam sagittis vitae. Ut elementum diam ac adipiscing volutpat.
 						</article>
 					</div>
 					<hr />
@@ -102,6 +111,7 @@
 					<hr />
 				</div>
 			</div>
+		</div>
 		</div>
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>

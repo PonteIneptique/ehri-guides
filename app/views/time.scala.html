@@ -3,39 +3,25 @@
 @JS = @{List("leaflet.js", "jquery.ui.min.js") }
 @CSS = @{List("leaflet.css", "jquery.ui.css", "jquery.ui.theme.css") }
 
-@main("Welcome to Play", JS, CSS) {
+@main("Time browsing", JS, CSS, "creationTime") {
 	<article>
-		<header class="page-header">
-			<h1>Time browsing</h1>
+		<header>
+			<form role="form">
+				<ul class="nav nav-pills nav-ehri nav-ehri-black nav-justified">
+					<li><input class="nav-ehri nav-ehri-black nav-ehri-input" name="search" placeholder="Quick Search" /></li>
+					<li><button type="button" class="nav-ehri nav-ehri-black nav-ehri-input">Order by Date</button></li>
+					<li><button type="button" class="nav-ehri nav-ehri-black nav-ehri-input">by Size</button></li>
+					<li><button type="button" class="nav-ehri nav-ehri-black nav-ehri-input">by Title</button></li>
+				</ul>
+				<ul class="nav nav-pills nav-ehri nav-ehri-grey nav-justified border-top" id="slider-val">
+					<li><input type="hidden" value="" id="date-range-min" /><input class="nav-ehri nav-ehri-grey nav-ehri-input date-range-picker min-show" data-target="date-range-min" placeholder="From" /></li>
+					<li><input type="hidden" value="" id="date-range-max" /><input class="nav-ehri nav-ehri-grey nav-ehri-input date-range-picker max-show" data-target="date-range-max" placeholder="To" /></li>
+				</ul>
+				<div id="slider-range" style="clear:both; margin-top:20px;"></div>
+							
+			</form>
 		</header>
 		<section>
-			<section class="content-options">
-				<form class="form-inline" role="form">
-					<div class="form-group">
-						<input class="form-control" name="search" placeholder="Quick Search" />
-					</div>
-					
-					<div class="btn-group pull-right">
-						<button type="button" class="btn btn-default btn-active">Order by Date</button>
-						<button type="button" class="btn btn-default btn-active">By Size</button>
-						<button type="button" class="btn btn-default">By Title</button>
-					</div>
-					
-					<div id="slider-range" style="clear:both; margin-top:20px;"></div>
-					<div style=" margin-top:20px;" id="slider-val" >
-						<div class="form-group">
-							<input type="hidden" value="" id="date-range-min" />
-							<input class="form-control form-noborder min-show date-range-picker" data-target="date-range-min" placeholder="From" />
-						</div>
-						
-						<div class="form-group pull-right">
-							<input type="hidden" value="" id="date-range-max" />
-							<input class="form-control form-noborder max-show date-range-picker" data-target="date-range-max" placeholder="To" />
-						</div>
-					</div>
-				</form>
-				<hr />
-			</section>
 			<section class="content-results">
 				<ul class="list-item">
 					<li class="item-wrapper documentaryUnit">

@@ -3,24 +3,16 @@
 @JS = @{List("leaflet.js", "jquery.ui.min.js") }
 @CSS = @{List("leaflet.css", "jquery.ui.css", "jquery.ui.theme.css", "font-awesome.css") }
 
-@main("Welcome to Play", JS, CSS) {
+@main("Keywords", JS, CSS, "keywords") {
 	<article>
-		<header class="page-header">
-			<h1>Keywords</h1>
+		<header>
+			<form role="form">
+				<ul class="nav nav-pills nav-ehri nav-ehri-black nav-justified">
+					<li><input class="nav-ehri nav-ehri-black nav-ehri-input" name="search" placeholder="Quick Search" /></li>
+				</ul>
+			</form>
 		</header>
 		<section>
-			<section class="content-options">
-				<form class="form-inline" role="form">
-					<div class="form-group">
-						<input class="form-control" name="search" placeholder="Quick Search" />
-					</div>
-					
-					<div class="btn-group pull-right">
-						<button type="button" class="btn btn-default btn-active"><span class="glyphicon-key"></span></button>
-					</div>
-				</form>
-				<hr />
-			</section>
 			<section class="content-results">
 				<ul class="list-item">
 					<li class="item-wrapper">
