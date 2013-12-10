@@ -68,5 +68,15 @@ object Application extends Controller {
 			Ok(views.html.item(show))
 		} 
 	}
+	def organizationsShow = Action { implicit request =>
+		println(request.getQueryString("foo"))
+		DB.withConnection { implicit c =>
+			val result = SQL("Select * from places")
+			val show = result().map(row => 
+				row[String]("X_place") -> row[String]("Y_place")
+			).toList
+			Ok(views.html.organizations(show))
+		} 
+	}
 
 }

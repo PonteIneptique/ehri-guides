@@ -161,7 +161,7 @@ body > .container {
 				.transition(all 0.5s ease);
 			}
 			&:hover, &.checked {
-				.item-option {
+				> .item-option {
 					width:30px;
 					.transition(all 0.5s ease);
 				}
@@ -173,7 +173,7 @@ body > .container {
 				line-height:30px;
 				font-weight:bolder;
 				padding-left:1em;
-				border-left:thick solid @ehri-dark-purple;
+				border-left:5px solid @ehri-dark-purple;
 				
 				&.keyword-title {
 					cursor:pointer;
@@ -198,7 +198,7 @@ body > .container {
 				display:none;
 				font-style:italic;
 				padding-left:1em;
-				border-left:thick solid lighten(@ehri-dark-purple, 20%);	
+				border-left:5px solid lighten(@ehri-dark-purple, 20%);	
 				min-height:0;
 				max-height:0;
 				text-align:justify;
@@ -231,6 +231,27 @@ body > .container {
 				.item-title				{	border-color:@ehri-historical-agent; }
 				.item-description		{	border-color:lighten(@ehri-historical-agent, 20%); }
 				.item-option		{	background-color:@ehri-historical-agent;	color:white; }
+			}
+		}
+		.list-item {
+			padding-top:1em;
+		}
+		&.hierarchy {
+			.list-item {
+				margin-left:20px;
+				border-left:2px solid @content-color;
+				&:hover {
+					border-left:2px dashed lighten(@ehri-dark-purple, 20%);
+				}
+				.item-wrapper {
+					> .item-title {
+						border-left:none!important;
+					}
+					margin:0;
+				}
+			}
+			.item-parent {
+				display:none;
 			}
 		}
 	}
@@ -391,7 +412,7 @@ header#top {
 			margin-right:5px;
 			display:block;
 		}
-		.list-item {		
+		.list-item {
 			.item-wrapper {
 				.item-title {
 					padding-left:40px;

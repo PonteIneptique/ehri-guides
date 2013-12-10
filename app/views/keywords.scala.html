@@ -10,34 +10,46 @@
 				<ul class="nav nav-pills nav-ehri nav-ehri-black nav-justified">
 					<li><input class="nav-ehri nav-ehri-black nav-ehri-input" name="search" placeholder="Quick Search" /></li>
 				</ul>
+				<ul class="nav nav-pills nav-ehri nav-ehri-grey nav-justified">
+					<li class="active show-hierarchy"><a href="#"><i class="fa fa-indent "></i></a></li>
+					<li class="show-list"><a href="#"><i class="fa fa-th-list "></i></a></li>
+					<li><a href="#"><i class="fa fa-sort-numeric-asc"></i></a></li>
+					<li><a href="#"><i class="fa fa-sort-amount-asc"></i></a></li>
+					<li><a href="#"><i class="fa fa-sort-alpha-asc"></i></a></li>
+				</ul>
 			</form>
 		</header>
 		<section>
 			<section class="content-results">
-				<ul class="list-item">
+				<ul class="list-item hierarchy">
 					<li class="item-wrapper">
 						<div class="item-option"><i class="item-nice-checkbox fa fa-square-o"></i></div>
 						<a class="item-title keyword-title"><span class="item-parent">Lorem</span>Lorem ipsum</a>
-						<div class="item-description in">Vivamus a ante vel neque malesuada vehicula non quis leo. Phasellus et enim rutrum, porttitor diam vel, faucibus diam. Aenean id pulvinar nisl. Sed ipsum nibh, pharetra eu felis quis, tempus egestas leo. Vestibulum ipsum lorem, pellentesque et nisi ut, tristique rhoncus odio. Morbi adipiscing eros quis quam auctor fermentum. Sed ultricies ligula augue, et suscipit lorem aliquet quis. Aenean vel nisl in massa consectetur sagittis. </div>
+					
 						<input class="item-checkbox" type="checkbox" value="5" />
 					</li>
 					<li class="item-wrapper">
 						<div class="item-option"><i class="item-nice-checkbox fa fa-square-o"></i></div>
 						<a class="item-title keyword-title"><span class="item-parent">Lorem</span><span class="item-parent">Lorem</span>Lorem ipsum</a>
 						<input class="item-checkbox" type="checkbox" value="5" />
-						<div class="item-description in">Vivamus a ante vel neque malesuada vehicula non quis leo. Phasellus et enim rutrum, porttitor diam vel, faucibus diam. Aenean id pulvinar nisl. Sed ipsum nibh, pharetra eu felis quis, tempus egestas leo. Vestibulum ipsum lorem, pellentesque et nisi ut, tristique rhoncus odio. Morbi adipiscing eros quis quam auctor fermentum. Sed ultricies ligula augue, et suscipit lorem aliquet quis. Aenean vel nisl in massa consectetur sagittis. </div>
+						
 					</li>
 					<li class="item-wrapper">
 						<div class="item-option"><i class="item-nice-checkbox fa fa-square-o"></i></div>
 						<a class="item-title keyword-title"><span class="item-parent">Lorem</span><span class="item-parent">Lorem</span><span class="item-parent">Lorem</span>Lorem ipsum</a>
-						<div class="item-description in">Vivamus a ante vel neque malesuada vehicula non quis leo. Phasellus et enim rutrum, porttitor diam vel, faucibus diam. Aenean id pulvinar nisl. Sed ipsum nibh, pharetra eu felis quis, tempus egestas leo. Vestibulum ipsum lorem, pellentesque et nisi ut, tristique rhoncus odio. Morbi adipiscing eros quis quam auctor fermentum. Sed ultricies ligula augue, et suscipit lorem aliquet quis. Aenean vel nisl in massa consectetur sagittis. </div>
 						<input class="item-checkbox" type="checkbox" value="5" />
 					</li>
 					<li class="item-wrapper">
 						<div class="item-option"><i class="item-nice-checkbox fa fa-square-o"></i></div>
 						<a class="item-title keyword-title">Lorem ipsum</a>
 						<input class="item-checkbox" type="checkbox" value="5" />
-						<div class="item-description in">Vivamus a ante vel neque malesuada vehicula non quis leo. Phasellus et enim rutrum, porttitor diam vel, faucibus diam. Aenean id pulvinar nisl. Sed ipsum nibh, pharetra eu felis quis, tempus egestas leo. Vestibulum ipsum lorem, pellentesque et nisi ut, tristique rhoncus odio. Morbi adipiscing eros quis quam auctor fermentum. Sed ultricies ligula augue, et suscipit lorem aliquet quis. Aenean vel nisl in massa consectetur sagittis. </div>
+						<ul class="list-item">
+							<li class="item-wrapper">
+								<div class="item-option"><i class="item-nice-checkbox fa fa-square-o"></i></div>
+								<a class="item-title keyword-title"><span class="item-parent">Internal Affairs</span> Registration</a>
+								<input class="item-checkbox" type="checkbox" value="5" />
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -76,6 +88,16 @@
 		});
 		$(".list-item .item-option").on("click", function() {
 			niceCheck($(this).siblings(".item-title"), false);
+		});
+		$(".show-hierarchy").on("click", function() {
+			$(".content-results > .list-item").addClass("hierarchy");
+			$(this).addClass("active");
+			$(".show-list").removeClass("active");
+		});
+		$(".show-list").on("click", function() {
+			$(".content-results > .list-item").removeClass("hierarchy");
+			$(this).addClass("active");
+			$(".show-hierarchy").removeClass("active");
 		});
 	});
 	</script>
